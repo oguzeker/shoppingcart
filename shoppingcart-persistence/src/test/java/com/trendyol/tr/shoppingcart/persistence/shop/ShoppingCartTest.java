@@ -15,8 +15,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class ShoppingCartTest extends ShoppingCartTestBase {
 	
-	double d;
-	
 	@Before
 	public void setup() {
 		populateCarts();
