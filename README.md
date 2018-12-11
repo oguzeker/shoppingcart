@@ -7,6 +7,7 @@
 * @since   2018-12-09 
 */
 
+
 Please check the following files for implementation details:
 
 /shoppingcart-persistence/src/main/java/com/trendyol/tr/shoppingcart/persistence/shop/ShoppingCart.java
