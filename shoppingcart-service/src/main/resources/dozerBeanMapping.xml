@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping>
+		<class-a>com.trendyol.tr.shoppingcart.persistence.entity.Product</class-a>
+		<class-b>com.trendyol.tr.shoppingcart.schema.Product</class-b>
+	</mapping>
+	
+	<mapping>
+		<class-a>com.trendyol.tr.shoppingcart.persistence.entity.Category</class-a>
+		<class-b>com.trendyol.tr.shoppingcart.schema.Category</class-b>
+	
+		<field>
+			<a>category</a>
+			<b>parentCategory</b>
+		</field>
+		
+		<field-exclude>
+			<a>campaigns</a>
+			<b>campaigns</b>
+		</field-exclude>
+	</mapping>
+	
+	<mapping>
+		<class-a>com.trendyol.tr.shoppingcart.persistence.entity.Campaign</class-a>
+		<class-b>com.trendyol.tr.shoppingcart.schema.Campaign</class-b>
+	</mapping>
+	
+	<mapping>
+		<class-a>com.trendyol.tr.shoppingcart.persistence.entity.Coupon</class-a>
+		<class-b>com.trendyol.tr.shoppingcart.schema.Coupon</class-b>
+	</mapping>
+	
+	<mapping>
+		<class-a>com.trendyol.tr.shoppingcart.persistence.entity.Cart</class-a>
+		<class-b>com.trendyol.tr.shoppingcart.schema.Cart</class-b>
+	</mapping>
+	
+	<mapping>
+		<class-a>com.trendyol.tr.shoppingcart.persistence.entity.Purchase</class-a>
+		<class-b>com.trendyol.tr.shoppingcart.schema.Purchase</class-b>
+	</mapping>
+	
+	
+</mappings>

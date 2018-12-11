@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.trendyol.tr</groupId>
+		<artifactId>shoppingcart</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>shoppingcart-ear</artifactId>
+	<name>shoppingcart-ear</name>
+	<packaging>ear</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.trendyol.tr</groupId>
+			<artifactId>shoppingcart-service</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>com.trendyol.tr</groupId>
+			<artifactId>shoppingcart-ws</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-ear-plugin</artifactId>
+						<configuration>
+							<modules>
+								<ejbModule>
+									<groupId>com.trendyol.tr</groupId>
+									<artifactId>shoppingcart-service</artifactId>
+								</ejbModule>
+								<webModule>
+									<groupId>com.trendyol.tr</groupId>
+									<artifactId>shoppingcart-ws</artifactId>
+								</webModule>
+							</modules>
+							<applicationName>${project.artifactId}</applicationName>
+							<archive>
+								<manifestEntries>
+									<Dependencies>com.trendyol.tr.shoppingcart.configuration</Dependencies>
+									<Application-Version>${project.version}</Application-Version>
+								</manifestEntries>
+							</archive>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

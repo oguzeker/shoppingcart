@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns="http://trendyol.com/tr/shoppingcart/schema" 
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+           targetNamespace="http://trendyol.com/tr/shoppingcart/schema" 
+           elementFormDefault="qualified" attributeFormDefault="unqualified" jaxb:version="2.1">
+
+	<xs:simpleType name="date">
+		<xs:restriction base="xs:date">
+			<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dateTime">
+		<xs:restriction base="xs:dateTime">
+			<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}(\.\p{Nd}{3})?(Z|[+\-]\p{Nd}{2}:\p{Nd}{2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="idType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="product">
+		<xs:sequence>
+			<xs:element name="productId" type="idType" minOccurs="0"/>
+			<xs:element name="price" type="xs:double" minOccurs="0"/>
+			<xs:element name="title" type="xs:string"  minOccurs="0"/>
+			<xs:element name="category" type="category"  minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="category">
+		<xs:sequence>
+			<xs:element name="categoryId" type="idType" minOccurs="0"/>
+			<xs:element name="title" type="xs:string" minOccurs="0"/>
+			<xs:element name="parentCategory" type="category"  minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="campaign">
+		<xs:sequence>
+			<xs:element name="campaignId" type="idType" minOccurs="0"/>
+			<xs:element name="discount" type="xs:double" minOccurs="0"/>
+			<xs:element name="itemCount" type="xs:int" minOccurs="0"/>
+			<xs:element name="type" type="xs:int" minOccurs="0"/>
+			<xs:element name="category" type="category"  minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="coupon">
+		<xs:sequence>
+			<xs:element name="couponId" type="idType" minOccurs="0"/>
+			<xs:element name="cart" type="cart" minOccurs="0"/>
+			<xs:element name="minCartAmount" type="xs:double" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="cart">
+		<xs:sequence>
+			<xs:element name="cartId" type="idType" minOccurs="0"/>
+			<xs:element name="actualAmount" type="xs:double" minOccurs="0"/>
+			<xs:element name="finalAmount" type="xs:double" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="purchase">
+		<xs:sequence>
+			<xs:element name="cart" type="cart" minOccurs="0"/>
+			<xs:element name="product" type="product" minOccurs="0"/>
+			<xs:element name="quantity" type="xs:int" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>

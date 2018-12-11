@@ -1,0 +1,131 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="oguzeker (generated)" id="1544405725092-1">
+        <createTable tableName="campaign">
+            <column autoIncrement="true" name="campaign_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="category_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="min_item_count" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="discount" type="DOUBLE"/>
+            <column name="type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-2">
+        <createTable tableName="cart">
+            <column autoIncrement="true" name="cart_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="actual_amount" type="DOUBLE"/>
+            <column name="final_amount" type="DOUBLE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-3">
+        <createTable tableName="category">
+            <column autoIncrement="true" name="category_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="parent_category_id" type="INT"/>
+            <column name="title" type="VARCHAR(45)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-4">
+        <createTable tableName="coupon">
+            <column autoIncrement="true" name="coupon_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cart_id" type="INT"/>
+            <column name="min_cart_amount" type="DOUBLE"/>
+            <column name="discount" type="DOUBLE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-5">
+        <createTable tableName="product">
+            <column autoIncrement="true" name="product_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="category_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_price" type="DOUBLE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-6">
+        <createTable tableName="purchase">
+            <column name="product_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cart_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-7">
+        <addUniqueConstraint columnNames="category_id, min_item_count" constraintName="uq_item_count_category" tableName="campaign"/>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-8">
+        <addUniqueConstraint columnNames="title, category_id" constraintName="uq_title_category" tableName="product"/>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-9">
+        <createIndex indexName="fk_campaign_category_idx" tableName="campaign">
+            <column name="category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-10">
+        <createIndex indexName="fk_category_category_idx" tableName="category">
+            <column name="parent_category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-11">
+        <createIndex indexName="fk_coupon_cart_idx" tableName="coupon">
+            <column name="cart_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-12">
+        <createIndex indexName="fk_product_category_idx" tableName="product">
+            <column name="category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-13">
+        <createIndex indexName="fk_purchase_cart_idx" tableName="purchase">
+            <column name="cart_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-14">
+        <createIndex indexName="fk_purchase_product_idx" tableName="purchase">
+            <column name="product_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-15">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="campaign" constraintName="fk_campaign_category" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="category_id" referencedTableName="category" validate="true"/>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-16">
+        <addForeignKeyConstraint baseColumnNames="parent_category_id" baseTableName="category" constraintName="fk_category_category" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="category_id" referencedTableName="category" validate="true"/>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-17">
+        <addForeignKeyConstraint baseColumnNames="cart_id" baseTableName="coupon" constraintName="fk_coupon_cart" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="cart_id" referencedTableName="cart" validate="true"/>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-18">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="product" constraintName="fk_product_category" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="category_id" referencedTableName="category" validate="true"/>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-19">
+        <addForeignKeyConstraint baseColumnNames="cart_id" baseTableName="purchase" constraintName="fk_purchase_cart" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="cart_id" referencedTableName="cart" validate="true"/>
+    </changeSet>
+    <changeSet author="oguzeker (generated)" id="1544405725092-20">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="purchase" constraintName="fk_purchase_product" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="product_id" referencedTableName="product" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

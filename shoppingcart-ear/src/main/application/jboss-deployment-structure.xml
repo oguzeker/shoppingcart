@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+ <deployment>
+   <dependencies>
+   		<!-- 
+       <module name="org.eclipse.persistence" slot="2.2.0" />  -->
+<!--        <module name="com.hazelcast" /> -->
+<!--        <module name="org.slf4j" /> -->
+<!--        <module name="javaee.api" /> -->
+<!--        <module name="com.trendyol.tr.shoppingcart.configuration" /> -->
+   </dependencies>
+ </deployment>
+</jboss-deployment-structure>
